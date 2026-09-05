@@ -10,7 +10,7 @@ pinned: false
 license: mit
 ---
 
-# 🇰🇲 Assistant Documentaire — Comores
+# 🇰🇲 Assistant Documentaire - Comores
 
 Assistant qui répond à des questions sur les Comores (histoire, anthropologie,
 santé, démographie, écologie, religion, linguistique, tourisme...) à partir
@@ -21,4 +21,4 @@ d'un corpus de 700+ documents, en citant systématiquement ses sources.
 limitée pour rester 100% gratuit à héberger.
 
 Code source complet et pipeline d'entraînement :
-[github.com/&lt;ton-compte&gt;/comores-ia](https://github.com/)
+[github.com/&lt;sefdineahmed&gt;/comores-assistant-ia](https://github.com/sefdineahmed/comoros-assistant-ai)
