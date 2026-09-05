@@ -1,22 +1,12 @@
 # Caches générés par le pipeline (potentiellement volumineux)
-data/
 
-# Corpus documentaire (téléchargé depuis Google Drive, pas versionné)
-Quelques documents sur les Comores/
-
-# Environnements Python
-venv/
-env/
+# Fichiers Python temporaires
 __pycache__/
 *.pyc
 
-# Modèles téléchargés localement (Hugging Face)
-.cache/
+# Données générées volumineuses
+data/*.pkl
+data/*.npz
 
-# Fichiers système
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
+# Rapports générés
+data/*.json
