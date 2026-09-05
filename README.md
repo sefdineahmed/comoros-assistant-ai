@@ -2,8 +2,6 @@
 
 **Assistant documentaire intelligent sur les Comores**, basé sur une architecture RAG (Retrieval-Augmented Generation) : il répond à des questions sur l'archipel des Comores (histoire, anthropologie, santé, démographie, écologie, religion, linguistique, tourisme, etc.) en citant précisément ses sources, à partir d'un corpus de plus de 700 documents académiques, administratifs et institutionnels.
 
-> ⚠️ Projet réalisé dans le cadre de l'atelier **Objectif-IA**. Ceci n'est pas un produit fini : c'est un pipeline pédagogique, documenté étape par étape, pensé pour être compris et modifié facilement.
-
 ## Sommaire
 
 - [À propos](#à-propos)
@@ -23,7 +21,7 @@
 
 ## À propos
 
-Ce projet transforme un fonds documentaire hétérogène (PDF, Word, Excel, PowerPoint) portant sur les Comores en un assistant conversationnel capable de répondre à des questions précises, **en citant le document source pour chaque affirmation** — plutôt que de laisser un modèle de langage halluciner des réponses génériques.
+Ce projet transforme un fonds documentaire hétérogène (PDF, Word, Excel, PowerPoint) portant sur les Comores en un assistant conversationnel capable de répondre à des questions précises, **en citant le document source pour chaque affirmation**, plutôt que de laisser un modèle de langage halluciner des réponses génériques.
 
 Le corpus couvre notamment :
 
@@ -44,16 +42,16 @@ Le corpus couvre notamment :
 
 ## Fonctionnalités
 
-- 📂 **Extraction multi-formats** : PDF, DOCX, PPTX, XLSX, parcourus récursivement dans l'arborescence de dossiers
-- 🏷️ **Catégorisation automatique** : chaque passage garde la trace de son dossier d'origine (ex. `Santé`, `Religion`, `Pêche`) comme métadonnée
-- ✂️ **Découpage intelligent** (chunking) avec chevauchement, qui coupe de préférence en fin de phrase
-- 🧠 **Recherche sémantique multilingue** (français / anglais / arabe) via des embeddings `sentence-transformers`
-- 📎 **Citations systématiques** : chaque réponse indique le(s) document(s) source(s)
-- 🚫 **Anti-hallucination** : si l'information n'est dans aucun document, l'assistant le dit explicitement plutôt que d'inventer
-- ⚡ **Mise en cache à chaque étape** : extraction, découpage et embeddings ne sont recalculés que si les fichiers sources changent
-- 🧪 **Tests automatisés** : tests unitaires (pytest) + évaluation qualité du moteur de recherche
-- 🌐 **Interface web** (Gradio) avec filtre par catégorie
-- 🔍 **Filtrage par catégorie** pour affiner la recherche à un domaine précis
+- **Extraction multi-formats** : PDF, DOCX, PPTX, XLSX, parcourus récursivement dans l'arborescence de dossiers
+- **Catégorisation automatique** : chaque passage garde la trace de son dossier d'origine (ex. `Santé`, `Religion`, `Pêche`) comme métadonnée
+- **Découpage intelligent** (chunking) avec chevauchement, qui coupe de préférence en fin de phrase
+- **Recherche sémantique multilingue** (français / anglais / arabe) via des embeddings `sentence-transformers`
+- **Citations systématiques** : chaque réponse indique le(s) document(s) source(s)
+- **Anti-hallucination** : si l'information n'est dans aucun document, l'assistant le dit explicitement plutôt que d'inventer
+-  **Mise en cache à chaque étape** : extraction, découpage et embeddings ne sont recalculés que si les fichiers sources changent
+- **Tests automatisés** : tests unitaires (pytest) + évaluation qualité du moteur de recherche
+- **Interface web** (Gradio) avec filtre par catégorie
+- **Filtrage par catégorie** pour affiner la recherche à un domaine précis
 
 ## Architecture du pipeline
 
@@ -68,7 +66,7 @@ Le projet suit une architecture en 4 étapes séquentielles, chacune persistant 
 | Étape | Rôle | Entrée | Sortie (cache) |
 |---|---|---|---|
 | **1. ETL** | Extract (lecture des fichiers) → Transform (nettoyage + découpage) → Load (sauvegarde) | Corpus brut (PDF/DOCX/PPTX/XLSX) | `data/01_extraction.pkl`, `data/02_passages.pkl` |
-| **2. Entraînement** | Encode chaque passage en vecteur sémantique (embedding) | Passages découpés | `data/03_embeddings.npz` |
+| **2.Entraînement** | Encode chaque passage en vecteur sémantique (embedding) | Passages découpés | `data/03_embeddings.npz` |
 | **3. Tests** | Vérifie la logique (unitaires) + mesure si le moteur retrouve les bonnes sources | Index entraîné | `data/04_rapport_tests.json` |
 | **4. App** | Charge le LLM, répond aux questions avec citations, expose une interface web | Index + modèle de langage | — |
 
@@ -96,7 +94,7 @@ comoros-assistant-ai/
 
 ## Corpus documentaire
 
-Le corpus (plus de 700 documents, plusieurs Go) **n'est pas versionné dans ce dépôt** — Git n'est pas adapté au stockage de fichiers binaires volumineux, et beaucoup de ces documents ont un statut de diffusion propre à respecter.
+Le corpus (plus de 700 documents, plusieurs Go) **n'est pas versionné dans ce dépôt**, Git n'est pas adapté au stockage de fichiers binaires volumineux, et beaucoup de ces documents ont un statut de diffusion propre à respecter.
 
 **Les documents sont disponibles ici :**
 [Google Drive - Documents sur les Comores](https://drive.google.com/drive/folders/1RxAWS7RQasmIqolefXz2F_7_NEXsqCJt?usp=drive_link)
@@ -105,7 +103,7 @@ Pour utiliser ce projet :
 1. Télécharger (ou synchroniser) le dossier Drive ci-dessus sur ta machine
 2. Renseigner son chemin local dans `config.py` (voir [Configuration](#configuration))
 
-L'arborescence attendue est celle du dossier Drive, avec une catégorie par sous-dossier de premier niveau (`Santé/`, `Religion/`, `Pêche/`, etc.) — c'est ce sous-dossier qui sert de métadonnée de citation.
+L'arborescence attendue est celle du dossier Drive, avec une catégorie par sous-dossier de premier niveau (`Santé/`, `Religion/`, `Pêche/`, etc.), c'est ce sous-dossier qui sert de métadonnée de citation.
 
 ## Prérequis
 
