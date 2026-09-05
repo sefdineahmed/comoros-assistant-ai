@@ -1,0 +1,10 @@
+sentence-transformers
+gradio
+pypdf
+python-docx
+python-pptx
+openpyxl
+transformers
+torch
+tqdm
+pytest
