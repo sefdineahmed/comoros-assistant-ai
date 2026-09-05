@@ -1,0 +1,6 @@
+gradio
+sentence-transformers
+transformers
+torch
+huggingface_hub
+numpy
