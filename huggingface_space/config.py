@@ -5,12 +5,11 @@ calculé depuis un Hugging Face Dataset (voir hf_utils.py).
 """
 
 import os
-import torch
 
 # =============================================================================
 # ⬇️ À RENSEIGNER : le repo_id du dataset créé avec upload_dataset_to_hf.py
 # =============================================================================
-DATASET_REPO_ID = "TON_PSEUDO/comores-ia-index"  # <-- change ceci !
+DATASET_REPO_ID = "sefdineahmed/comores-ia-index" # <-- change ceci !
 DATASET_PRIVE = False  # True si tu as uploadé le dataset avec --prive
 
 # =============================================================================
@@ -31,10 +30,12 @@ CACHE_EMBEDDINGS = os.path.join(DOSSIER_DATA, NOM_FICHIER_EMBEDDINGS)
 MODELE_EMBEDDING = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 
 # =============================================================================
-# GÉNÉRATION — Space gratuit = CPU uniquement, donc modèle léger
+# GÉNÉRATION — ZeroGPU (GPU réel attaché à la demande, gratuit avec quota)
 # =============================================================================
-MODELE_LLM = "Qwen/Qwen2.5-0.5B-Instruct"
-DEVICE = -1  # CPU (les Spaces gratuits n'ont pas de GPU)
+MODELE_LLM = "Qwen/Qwen2.5-1.5B-Instruct"  # un cran au-dessus de la version CPU : le GPU encaisse largement
+# Note : DEVICE n'est plus utilisé ici — app.py gère explicitement le
+# placement CPU/GPU via @spaces.GPU (ZeroGPU n'attache un GPU que pendant
+# l'appel décoré, pas en permanence).
 
 MAX_NEW_TOKENS = 350  # un peu réduit par rapport au local pour des réponses plus rapides
 K_PASSAGES_DEFAUT = 5

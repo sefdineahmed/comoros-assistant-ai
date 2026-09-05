@@ -1,6 +1,6 @@
 ---
 title: Assistant Comores IA
-emoji: 🇰🇲
+emoji: 🌴
 colorFrom: green
 colorTo: blue
 sdk: gradio
@@ -8,9 +8,10 @@ sdk_version: 5.9.1
 app_file: app.py
 pinned: false
 license: mit
+suggested_hardware: zero-a10g
 ---
 
-# 🇰🇲 Assistant Documentaire - Comores
+# 🇰🇲 Assistant Documentaire — Comores
 
 Assistant qui répond à des questions sur les Comores (histoire, anthropologie,
 santé, démographie, écologie, religion, linguistique, tourisme...) à partir
@@ -21,4 +22,4 @@ d'un corpus de 700+ documents, en citant systématiquement ses sources.
 limitée pour rester 100% gratuit à héberger.
 
 Code source complet et pipeline d'entraînement :
-[github.com/&lt;sefdineahmed&gt;/comores-assistant-ia](https://github.com/sefdineahmed/comoros-assistant-ai)
+[github.com/&lt;ton-compte&gt;/comores-ia](https://github.com/)

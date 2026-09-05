@@ -1,0 +1,70 @@
+{
+  "taux_succes": 0.6,
+  "details": [
+    {
+      "question": "Quelle est l'origine du peuplement de la Grande Comore ?",
+      "categorie_attendue": "Archéologie",
+      "categories_trouvees": [
+        "Patrimoine et Urbanisme",
+        "Patrimoine et Urbanisme",
+        "Diaspora",
+        "Sociologie",
+        "Ecologie et Environnement"
+      ],
+      "succes": false,
+      "meilleur_score": 0.789
+    },
+    {
+      "question": "Quels sont les principaux enjeux de la pêche artisanale aux Comores ?",
+      "categorie_attendue": "Agriculture - Pêche",
+      "categories_trouvees": [
+        "Agriculture - Pêche",
+        "Ecologie et Environnement",
+        "Agriculture - Pêche",
+        "Agriculture - Pêche",
+        "Agriculture - Pêche"
+      ],
+      "succes": true,
+      "meilleur_score": 0.837
+    },
+    {
+      "question": "Comment s'organise le système éducatif aux Comores ?",
+      "categorie_attendue": "Education",
+      "categories_trouvees": [
+        "Education",
+        "Education",
+        "Education",
+        "Education",
+        "Education"
+      ],
+      "succes": true,
+      "meilleur_score": 0.824
+    },
+    {
+      "question": "Quelle est la situation démographique des Comores ?",
+      "categorie_attendue": "Démographie",
+      "categories_trouvees": [
+        "Santé",
+        "Sociologie",
+        "Sociologie",
+        "Sociologie",
+        "Sociologie"
+      ],
+      "succes": false,
+      "meilleur_score": 0.838
+    },
+    {
+      "question": "Quel est le rôle de l'islam dans la société comorienne ?",
+      "categorie_attendue": "Religion",
+      "categories_trouvees": [
+        "Swahili",
+        "Diaspora",
+        "Religion",
+        "Genre",
+        "Etat-Nation"
+      ],
+      "succes": true,
+      "meilleur_score": 0.802
+    }
+  ]
+}

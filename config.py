@@ -15,12 +15,12 @@ import torch
 # Par défaut, on suppose que "comores_ia/" et "Quelques documents sur les
 # Comores/" sont deux dossiers VOISINS (même dossier parent) :
 #   Objectif-IA/
-#   ├── Quelques documents sur les Comores/
-#   └── comores_ia/            ← tu lances les scripts depuis ici
+#   ├── documents-comores/
+#   └── comores-ast-sistania/            ← tu lances les scripts depuis ici
 # D'où le "../" pour remonter d'un niveau. Si ton arborescence est
 # différente, remplace directement par le chemin absolu, ex (Linux/Mac) :
-#   DOSSIER_DOCUMENTS = "/home/sefdine/github/portfolio-bi-telecom/Objectif-IA/Quelques documents sur les Comores"
-DOSSIER_DOCUMENTS = "../Quelques documents sur les Comores"
+#   DOSSIER_DOCUMENTS = "/home/sefdine/github/documents-comores"
+DOSSIER_DOCUMENTS = "../documents-comores"
 
 # Dossier où on stocke tous les fichiers intermédiaires (cache ETL, index,
 # résultats de tests). Rien de tout ça n'est à modifier à la main : chaque

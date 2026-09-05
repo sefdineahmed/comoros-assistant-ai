@@ -5,6 +5,9 @@ Hugging Face détecte et exécute automatiquement ce fichier (voir app_file
 dans l'en-tête YAML de README.md).
 """
 
+import spaces  # DOIT être le tout premier import (exigence ZeroGPU)
+import torch
+
 import config
 import hf_utils
 import entrainement
@@ -20,7 +23,10 @@ def charger_modele_local():
     transformers.logging.set_verbosity_error()
 
     print("Chargement du modèle local...")
-    generateur = pipeline("text-generation", model=config.MODELE_LLM, device=config.DEVICE)
+    # device=-1 : le modèle reste sur CPU tant qu'on n'est pas dans un appel
+    # décoré @spaces.GPU (ZeroGPU n'attache un GPU que le temps de cet appel).
+    generateur = pipeline("text-generation", model=config.MODELE_LLM, device=-1,
+                           torch_dtype=torch.float16)
     generateur.tokenizer.clean_up_tokenization_spaces = False
     generateur.model.generation_config.max_new_tokens = config.MAX_NEW_TOKENS
     generateur.model.generation_config.do_sample = False
@@ -31,9 +37,18 @@ def charger_modele_local():
     return generateur
 
 
+@spaces.GPU(duration=60)
 def demander_au_modele_local(generateur, messages):
-    sortie = generateur(messages)
-    return sortie[0]["generated_text"][-1]["content"]
+    """Décoré @spaces.GPU : Hugging Face attache un GPU réel juste pour la
+    durée de cet appel (jusqu'à 60s ici), puis le libère. On déplace donc le
+    modèle sur le GPU au début, et on le rend au CPU à la fin pour ne pas
+    garder de mémoire GPU réservée entre deux questions."""
+    generateur.model.to("cuda")
+    try:
+        sortie = generateur(messages)
+        return sortie[0]["generated_text"][-1]["content"]
+    finally:
+        generateur.model.to("cpu")
 
 
 def repondre(question, DOCUMENTS, vecteurs, encodeur, generateur, k=None, categorie_filtre=None):

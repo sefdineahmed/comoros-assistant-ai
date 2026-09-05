@@ -49,7 +49,8 @@ def entrainer(DOCUMENTS=None, forcer=False):
             cache = np.load(config.CACHE_EMBEDDINGS, allow_pickle=True)
             if str(cache["empreinte"]) == empreinte:
                 print("📦 Embeddings chargés depuis le cache (corpus inchangé, pas de recalcul).")
-                return cache["vecteurs"], encodeur
+                # .astype(float32) : fonctionne que le cache soit en float16 ou float32
+                return cache["vecteurs"].astype(np.float32), encodeur
 
     print(f"🧠 Entraînement du moteur sémantique sur {len(textes)} passages "
           f"(modèle : {config.MODELE_EMBEDDING})...")
@@ -59,7 +60,9 @@ def entrainer(DOCUMENTS=None, forcer=False):
         show_progress_bar=True,
         batch_size=config.BATCH_SIZE_EMBEDDING,
     )
-    np.savez(config.CACHE_EMBEDDINGS, vecteurs=vecteurs, empreinte=empreinte)
+    # Sauvegarde en float16 : fichier ~2x plus léger, sans perte notable pour
+    # la recherche sémantique (utile pour l'upload vers Hugging Face).
+    np.savez(config.CACHE_EMBEDDINGS, vecteurs=vecteurs.astype(np.float16), empreinte=empreinte)
     print(f"✅ Entraînement terminé : {len(vecteurs)} vecteurs de dimension "
           f"{vecteurs.shape[1]}, sauvegardés dans {config.CACHE_EMBEDDINGS}")
     return vecteurs, encodeur
